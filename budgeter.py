@@ -1,10 +1,15 @@
-
+import csv
 
 DATA_FILE = 'data.csv'
 FIELDNAMES = ['date', 'transaction', 'amount', 'note']
 
 def load_data():
-  pass
+  list_of_data = []
+  with open('data.csv', 'r', newline='') as data_file:
+    reader = csv.DictReader(data_file)
+    for row in reader:
+      row = list_of_data
+  return list_of_data
 
 def view_previous_entries(entries):
   pass
