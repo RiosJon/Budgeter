@@ -39,6 +39,14 @@ def add_new_entry(entries):
     transaction = "Expenses"
   amount = int(input("Amount: "))
   description = input("Describe the transaction: ")
+  with open("data.csv", 'w', newline='') as data_file:
+    writer = csv.DictWriter(data_file, FIELDNAMES)
+
+    writer.writeheader()
+
+
+  #dictwriter add this to csv file
+
 # ===========================================
 # =    Do Not Modify Anything Below Here    =
 # ===========================================
