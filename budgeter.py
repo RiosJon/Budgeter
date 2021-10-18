@@ -31,18 +31,23 @@ def display_profit_loss(entries):
 
   
 def add_new_entry(entries):
+  with open("data.csv", 'w', newline='') as data_file:
+    writer = csv.DictWriter(data_file, FIELDNAMES)
+  
   date = input("Date of Transaction (YYYY-MM-DD):")
   question = input("Was this income (Y/N): ")
+  
   if question.upper == "Y":
     transaction = "Income"
   elif question.upper == "N":
     transaction = "Expenses"
+  
   amount = int(input("Amount: "))
+  
   description = input("Describe the transaction: ")
-  with open("data.csv", 'w', newline='') as data_file:
-    writer = csv.DictWriter(data_file, FIELDNAMES)
-
-    writer.writeheader()
+  
+  new_dict = {'date': date, 'transaction': question , 'amount': amount, 'note': description}
+  writer.writerow(new_dict)
 
 
   #dictwriter add this to csv file
