@@ -1,3 +1,6 @@
 date,transaction,amount,note
 2021-01-01,Expense,50,Lemons
 2021-01-02,Income,100,Sales
+2021-11-01,Expense,50,more lemons
+2021-01-01,Income,11,jojojoj
+2021-01-01,Income,11,kjhkljh

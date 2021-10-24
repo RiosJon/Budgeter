@@ -8,46 +8,47 @@ def load_data():
   with open('data.csv', 'r', newline='') as data_file:
     reader = csv.DictReader(data_file)
     for row in reader:
-      row = list_of_data
+      list_of_data.append(row)
   return list_of_data
 
 def view_previous_entries(entries):
-  #The goal is to show all of the accounting entries in a human readable 
-  view_previous_entries = DATA_FILE
-  return entries
+  #The goal is to show all of the accounting entries in a human readable
+  for entry in entries:
+    print(f' The date was {entry["date"]} and this was a {entry["transaction"]}  for the amount of ${entry["amount"]} used for {entry["note"]}')
   
-
 def display_profit_loss(entries):
   expenses = 0
   income = 0
   for row in entries:
     if row["transaction"] == "Income":
-      income += row["amount"]
-    elif row['transaction'] == "Expenses":
-      expenses += row['amount']
+      income += int(row["amount"])
+    elif row['transaction'] == "Expense":
+      expenses += int(row['amount'])
   print(expenses, ':Theses are your expenses')
   print(income, ": This is your income")
   print(income - expenses, "This is your profit")
 
   
 def add_new_entry(entries):
-  with open("data.csv", 'w', newline='') as data_file:
-    writer = csv.DictWriter(data_file, FIELDNAMES)
   
   date = input("Date of Transaction (YYYY-MM-DD):")
   question = input("Was this income (Y/N): ")
-  
-  if question.upper == "Y":
+  transaction = ""
+  if question.upper() == "Y":
     transaction = "Income"
-  elif question.upper == "N":
+  else:
     transaction = "Expenses"
   
   amount = int(input("Amount: "))
   
   description = input("Describe the transaction: ")
   
-  new_dict = {'date': date, 'transaction': question , 'amount': amount, 'note': description}
-  writer.writerow(new_dict)
+  new_dict = {'date': date, 'transaction': transaction , 'amount': amount, 'note': description}
+  entries.append(new_dict)
+
+  with open("data.csv", 'a', newline='') as data_file:
+    writer = csv.DictWriter(data_file, FIELDNAMES)
+    writer.writerow(new_dict)
 
 
   #dictwriter add this to csv file
